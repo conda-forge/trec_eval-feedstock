@@ -13,11 +13,12 @@ source:
     - patches/0003-add-necessary-windows-sources-to-make-file.patch  # [win]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - make
 test:
   source_files:
@@ -56,3 +57,4 @@ about:
 extra:
   recipe-maintainers:
     - h-vetinari
+    - flaviomartins
