@@ -1,25 +1,24 @@
-{% set version = "9.0.8" %}
+{% set version = "10.0" %}
 
 package:
   name: trec_eval
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://github.com/usnistgov/trec_eval/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c3994a73103ec842e12df693749584a45814c35c36dcc15f38984bd463566ba1
+  sha256: 3edc204c0b9b8d8fddd02c797688213dc77180ee696d14a4a66cfb32e82c1051
   patches:
     - patches/0001-correct-the-version-number.patch
     - patches/0002-don-t-hardcode-compiler.patch
-    - patches/0003-add-necessary-windows-sources-to-make-file.patch  # [win]
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - make
+    - make  # [not win]
 test:
   source_files:
     - test/
