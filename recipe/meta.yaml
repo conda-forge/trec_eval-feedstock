@@ -2,7 +2,7 @@
 
 package:
   name: trec_eval
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://github.com/usnistgov/trec_eval/archive/refs/tags/v{{ version }}.tar.gz
