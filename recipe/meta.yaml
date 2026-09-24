@@ -1,25 +1,34 @@
-{% set version = "9.0.8" %}
+{% set version = "10.0" %}
 
 package:
   name: trec_eval
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
-  url: https://github.com/usnistgov/trec_eval/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c3994a73103ec842e12df693749584a45814c35c36dcc15f38984bd463566ba1
-  patches:
-    - patches/0001-correct-the-version-number.patch
-    - patches/0002-don-t-hardcode-compiler.patch
-    - patches/0003-add-necessary-windows-sources-to-make-file.patch  # [win]
+  - url: https://github.com/usnistgov/trec_eval/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 3edc204c0b9b8d8fddd02c797688213dc77180ee696d14a4a66cfb32e82c1051
+    patches:
+      - patches/0001-correct-the-version-number.patch
+      - patches/0002-don-t-hardcode-compiler.patch
+  # The release archive omits these Git submodules.
+  - git_url: https://github.com/alitrack/mman-win32.git
+    git_rev: 2d1c576e62b99e85d99407e1a88794c6e44c3310
+    folder: mman-win32
+  - git_url: https://github.com/kubo/ya_getopt.git
+    git_rev: 6ce431085b81d9bb8639ed2f858c4f4fbc3ab988
+    folder: ya_getopt
+  - git_url: https://github.com/win32ports/strings_h.git
+    git_rev: 822de6e8c368abb986b403792082189f3c602c45
+    folder: strings_h
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - make
+    - make  # [not win]
 test:
   source_files:
     - test/
